@@ -1,4 +1,6 @@
 # SmartHomeSystem-Programming
+# **_How to Execute_**
+
 To open and run this Java project, you'll need a Java development environment and an integrated development environment (IDE) like Eclipse, IntelliJ IDEA, or Visual Studio Code. 
 Run the SmartHome Class:
 
