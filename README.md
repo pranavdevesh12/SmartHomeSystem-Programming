@@ -105,3 +105,74 @@ _Displays detailed information about the status of all devices in the smart home
 
 _Allows the user to create triggers based on conditions and actions.
 Parses user input for conditions and actions, then evaluates and performs actions on devices based on conditions._
+
+# MindMap for SmartHome Program
+
+- Main Menu
+  - View Devices
+  - Add Device
+  - Remove Device
+  - Display Commands
+  - Set Schedule
+  - Device Status Details
+  - Add Trigger
+  - Exit Program
+
+- Components
+  - DeviceManager
+    - addDevice()
+    - getDevice()
+    - removeDevice()
+    - getDevices()
+  - Device
+    - id
+    - type
+    - getId()
+    - getType()
+  - Light
+    - isOn
+    - isOn()
+    - turnOn()
+    - turnOff()
+  - Thermostat
+    - temperature
+    - getTemperature()
+    - setTemperature()
+  - Door
+    - isLocked
+    - isLocked()
+    - lock()
+    - unlock()
+  - Schedule
+    - deviceId
+    - time
+    - statusOrTemperature
+
+- User Interactions
+  - Main Menu Options
+  - Input Device Info
+  - Input Device ID
+  - Input Schedule Time
+  - Input Status/Temperature
+  - Input Condition
+  - Input Action
+  - Input Device ID for Trigger
+
+- Actions
+  - Displaying Device List
+  - Adding a Device
+  - Removing a Device
+  - Displaying Commands
+  - Setting a Schedule
+  - Displaying Device Status
+  - Adding a Trigger
+  - Exiting the Program
+
+- Program Flow
+  - User selects options from the Main Menu
+  - Actions are performed based on the selected option
+  - Device information is managed by DeviceManager
+  - Devices have unique IDs and types
+  - Devices have specific actions and attributes
+  - Schedules can be set for devices
+  - Triggers can perform actions based on conditions
