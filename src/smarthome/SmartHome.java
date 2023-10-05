@@ -1,12 +1,7 @@
 package smarthome;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 import java.util.function.Predicate;
-
 
 public class SmartHome {
 
@@ -67,9 +62,17 @@ public class SmartHome {
     }
 
     private static void viewDevices() {
+        Map<String, Device> devices = deviceManager.getDevices();
+        boolean devicesFound = false;
+        System.out.println("");
         System.out.println("\n===== Devices =====");
-        for (Device device : deviceManager.getDevices().values()) {
+        for (Device device : devices.values()) {
             System.out.println("Device ID: " + device.getId() + ", Type: " + device.getType());
+            devicesFound = true;
+        }
+
+        if (!devicesFound) {
+            System.out.println("No devices found.Please Add devices");
         }
     }
 
@@ -136,7 +139,7 @@ public class SmartHome {
         System.out.print("Enter your choice: ");
 
         int choice = scanner.nextInt();
-        scanner.nextLine(); 
+        scanner.nextLine();
 
         System.out.print("Enter the device ID: ");
         String deviceId = scanner.nextLine();
@@ -211,7 +214,7 @@ public class SmartHome {
         }
         String scheduleTime;
         String scheduleData;
-        if (device instanceof Light || device instanceof Door) {
+        if (device instanceof Light) {
             System.out.print("Enter the time for the schedule (e.g., 08:00 AM): ");
             scheduleTime = scanner.nextLine();
             System.out.print("Enter the device status (On/Off): ");
@@ -220,6 +223,11 @@ public class SmartHome {
             System.out.print("Enter the time for the schedule (e.g., 08:00 AM): ");
             scheduleTime = scanner.nextLine();
             System.out.print("Enter the desired temperature: ");
+            scheduleData = scanner.nextLine();
+        } else if (device instanceof Door) {
+            System.out.print("Enter the time for the schedule (e.g., 08:00 AM): ");
+            scheduleTime = scanner.nextLine();
+            System.out.print("Enter the device status (Lock/Unlock): ");
             scheduleData = scanner.nextLine();
         } else {
             System.out.println("Scheduling is not applicable to the selected device.");
@@ -237,11 +245,15 @@ public class SmartHome {
             System.out.println("Device Status: " + scheduleData);
         } else if (device instanceof Thermostat) {
             System.out.println("Time Set: " + scheduleTime);
-            System.out.println("Desired Temperature: " + scheduleData + "F"); 
+            System.out.println("Desired Temperature: " + scheduleData + "F");
+        } else if (device instanceof Door) {
+            System.out.println("Time Set: " + scheduleTime);
+            System.out.println("Device Status: " + scheduleData);
         } else {
             System.out.println("Scheduling is not applicable to the selected device.");
         }
     }
+
     private static void deviceStatusDetails() {
         System.out.println("\n===== Device Status Details =====");
         for (Device device : deviceManager.getDevices().values()) {
@@ -258,6 +270,7 @@ public class SmartHome {
             System.out.println("Device ID: " + device.getId() + ", Type: " + device.getType() + ", Status: " + status);
         }
     }
+
     private static void addTrigger() {
         System.out.print("Enter condition (e.g., temperature > 75): ");
         String condition = scanner.nextLine();
@@ -322,14 +335,16 @@ public class SmartHome {
                             deviceStatusDetails();
                             return;
                         }
-                        
+
                     case "lightoff":
                         Device device2 = deviceManager.getDevice(deviceId);
                         if (device2 instanceof Light) {
                             ((Light) device2).turnOff();
                             deviceStatusDetails();
                         }
-                        
+                    default:
+                        System.out.println("Enter the Correct Action(eg: lightoff / lighton)");
+                        return;
                 }
             }
 
